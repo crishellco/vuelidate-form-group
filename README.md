@@ -6,11 +6,14 @@
 ![](badges/badge-lines.svg)
 ![](badges/badge-statements.svg)
 
-Subheading here
+A Vue Form Group component plugin for [Vuelidate](https://vuelidate.js.org/)
 
-description here
+This plugin provides a renderless component which, when using Vuelidate, validates and compiles (with value interpolation) error messages for individual form inputs.
 
-_This plugin requires that your project use Vuex_
+This plugin is a direct result of my findings while writing [Vuelidate: Effortless Error Messaging
+](https://crishell.co/articles/vuelidate--effortless-error-messaging/).
+
+![](assets/form.gif)
 
 ## Install
 
@@ -24,15 +27,122 @@ npm i -D vuelidate-form-group
 import Vue from 'vue';
 import VuelidateFormGroup from 'vuelidate-form-group';
 
-Vue.use(VuelidateFormGroup);
+const options = {
+  templates: {
+    email: 'Please enter a valid email address.',
+    required: 'Please enter your {label}.'
+  }
+}
+
+Vue.use(VuelidateFormGroup, options);
 ```
 
-## Component Usage
+### Options
+| Name               | Description                                                                                       | Default                     |
+|--------------------|---------------------------------------------------------------------------------------------------|-----------------------------|
+| `componentName`    | The name of the globally registered Form Group component                                          | `v-form-group`              |
+| `errorFormatter`   | The last method executed on any compiled Form Group component error string                        | `lodash.upperFirst`         |
+| `interpolateRegex` | The regex used by lodash.template to interpolate values into an error template during compilation | `/{([\s\S]+?)}/g`           |
+| `templates`        | The templates used to generated error strings for a given validator                               | `{}`                        |
+
+
+## Component
+
+### Props
+| Name          | Type     | Description                                               | Required |
+|---------------|----------|-----------------------------------------------------------|----------|
+| `label`       | `string` | The `label` value used for interpolation                  | Yes      |
+| `validations` | `object` | The Vuelidate object for the input model (i.e.`$v.email`) | Yes      |
+
+### Slot Scope (default)
+| Name      | Type      | Description                                                              |
+|-----------|-----------|--------------------------------------------------------------------------|
+| `errors`  | `array`   | The array of compiled error strings given the current state of the input |
+| `invalid` | `boolean` | If the input is valid given the current value and validators             |
+
+### Usage
+```javascript
+<template>
+  <!-- Wrap each form input in its own Form Group component -->
+  <v-form-group :validations="$v.email" label="email">
+    <div slot-scope="{ errors, invalid }">
+      <div>
+        <input
+          v-model="$v.email.$model"
+          type="email"
+          placeholder="Email Address"
+          :class="{ invalid }"
+        />
+      </div>
+      <span class="error-message" v-for="(error, index) in errors" :key="index">{{ error }}</span>
+    </div>
+  </v-form-group>
+</template>
+
+<script>
+import { email, required } from 'vuelidate/lib/validators';
+
+export default {
+  data() {
+    return {
+      email: ''
+    }
+  },
+
+  validations: {
+    email: {
+      email, // Please enter a valid email address.
+      required // Please enter your email.
+    },
+  }
+};
+</script>
+```
+
+## Interpolation/Compilation of Error Messages
+
+All values that exist in `$params` of the `validations` prop (a child of Vulidate's `vm.$v`) will be used during interpolation/compilation of error strings. The `label` prop will also be used.
+
+### Example
+
+Let's say we provide the following templates when installing the plugin:
 
 ```javascript
+const options = {
+  templates: {
+    minLength: 'Please enter a {label} with a length no less than {min}.'
+  }
+}
 ```
 
+And we have the following Vuelidate validations:
+
+```javascript
+validations: {
+  name: {
+    // The key of this validator must match the key of a template in the templates object!
+    minLength: minLength(10),
+  }
+}
+```
+
+And we provide the following `label` and `validations` props to `v-form-group`:
+
+![](assets/interpolation-values.png)
+
+The resulting interpolated/compiled error message will be:
+
+`Please enter a name with a length no less than 10.`
+
+### Additional Values for Interpolation/Compilation
+
+See the [Vuelidate $props support documentation](https://vuelidate.js.org/#sub-props-support) for more information on how to provide additional values for interpolation/compilation.
+
 ## Scripts
+
+```bash
+yarn demo
+```
 
 ```bash
 yarn lint

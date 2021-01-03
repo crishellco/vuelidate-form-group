@@ -32,7 +32,7 @@
 
       <div class="mt-4">
         <button
-          class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 rounded block w-full"
+          class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-3 rounded block w-full outline-none focus:outline-none focus:border-green-600 border-2 border-transparent"
           :class="{ 'opacity-50 cursor-not-allowed': $v.$anyError }"
           :disabled="$v.$anyError"
         >

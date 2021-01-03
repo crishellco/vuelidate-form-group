@@ -2,19 +2,19 @@
   "name": "vuelidate-form-group",
   "version": "0.0.0",
   "author": "Chris Mitchell (@crishellco)",
-  "description": "A Vue form group component made specifically for Vuelidate",
+  "description": "A Vue Form Group component plugin for Vuelidate",
   "main": "dist/index.js",
   "files": [
     "dist",
-    "src",
-    "nuxt"
+    "src"
   ],
   "scripts": {
     "test": "jest && jest-coverage-badges output badges",
     "lint": "eslint --ext .js,.vue src/",
     "lint:fix": "eslint --ext .js,.vue src/ --fix",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "demo": "yarn --cwd demo run serve"
+    "demo": "yarn --cwd demo run serve",
+    "postinstall": "yarn --cwd demo install"
   },
   "repository": {
     "type": "git",
