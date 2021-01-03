@@ -8,12 +8,27 @@
 
 A Vue Form Group component plugin for [Vuelidate](https://vuelidate.js.org/)
 
-This plugin provides a renderless component which, when using Vuelidate, validates and compiles (with value interpolation) error messages for individual form inputs.
-
-This plugin is a direct result of my findings while writing [Vuelidate: Effortless Error Messaging
+This plugin provides a renderless component which, when using Vuelidate, validates and compiles (with value interpolation) error messages for individual form inputs. This plugin is a direct result of my findings while writing [Vuelidate: Effortless Error Messaging
 ](https://crishell.co/articles/vuelidate--effortless-error-messaging/).
 
+Check out the [demo](https://jovial-noyce-2ca41b.netlify.app/)
+
 ![](assets/form.gif)
+
+- [Install](#install)
+  * [Options](#options)
+- [Form Group Component](#form-group-component)
+  * [Props](#props)
+  * [Slot Scope (default)](#slot-scope--default-)
+  * [Usage](#usage)
+- [Interpolation/Compilation of Error Messages](#interpolation-compilation-of-error-messages)
+  * [Example](#example)
+  * [Additional Values for Interpolation/Compilation](#additional-values-for-interpolation-compilation)
+- [Scripts](#scripts)
+- [How to Contribute](#how-to-contribute)
+  * [Pull Requests](#pull-requests)
+- [License](#license)
+
 
 ## Install
 
@@ -28,8 +43,20 @@ import Vue from 'vue';
 import VuelidateFormGroup from 'vuelidate-form-group';
 
 const options = {
+  /**
+   * Defining these templates is critical to get the most out of this plugin. Be sure to define templates
+   * for every Vuelidate validator you're using. A good place to start is to define
+   * templates for all built-in Vuelidate validators found here:
+   * https://vuelidate.js.org/#sub-builtin-validators
+   *
+   * If you forgo this step, you can still style your form elements
+   * using the invalid slot scope. However, crucial
+   * user context will be missing.
+   */
   templates: {
+    alpha: 'Alphanumeric characters only.',
     email: 'Please enter a valid email address.',
+    minLength: 'Please enter a {label} with a length no less than {min}.',
     required: 'Please enter your {label}.'
   }
 }
@@ -46,7 +73,7 @@ Vue.use(VuelidateFormGroup, options);
 | `templates`        | The templates used to generated error strings for a given validator                               | `{}`                        |
 
 
-## Component
+## Form Group Component
 
 ### Props
 | Name          | Type     | Description                                               | Required |
