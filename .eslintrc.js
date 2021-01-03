@@ -9,6 +9,14 @@ module.exports = {
     'prettier/vue',
     'plugin:prettier/recommended'
   ],
+  overrides: [
+    {
+      files: ['**/*.test.js'],
+      env: {
+        jest: true
+      }
+    }
+  ],
   parserOptions: {
     parser: 'babel-eslint'
   }

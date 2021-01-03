@@ -1,6 +1,6 @@
-# Vue Plugin Template
+# Vuelidate Form Group
 
-[![Codeship Status for crishellco/vue-plugin-template](https://app.codeship.com/projects/b9f076d0-ffc8-0137-c63e-5e5d9bf61b75/status?branch=master)](https://app.codeship.com/projects/378002)
+[![Codeship Status for crishellco/vuelidate-form-group](https://app.codeship.com/projects/b9f076d0-ffc8-0137-c63e-5e5d9bf61b75/status?branch=master)](https://app.codeship.com/projects/378002)
 ![](badges/badge-branches.svg)
 ![](badges/badge-functionss.svg)
 ![](badges/badge-lines.svg)
@@ -15,16 +15,16 @@ _This plugin requires that your project use Vuex_
 ## Install
 
 ```bash
-yarn add -D vue-plugin-template
+yarn add -D vuelidate-form-group
 # or
-npm i -D vue-plugin-template
+npm i -D vuelidate-form-group
 ```
 
 ```javascript
 import Vue from 'vue';
-import VuePluginTemplate from 'vue-plugin-template';
+import VuelidateFormGroup from 'vuelidate-form-group';
 
-Vue.use(VuePluginTemplate);
+Vue.use(VuelidateFormGroup);
 ```
 
 ## Component Usage
