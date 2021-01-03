@@ -1,6 +1,6 @@
 # Vuelidate Form Group
 
-[![Codeship Status for crishellco/vuelidate-form-group](https://app.codeship.com/projects/b9f076d0-ffc8-0137-c63e-5e5d9bf61b75/status?branch=master)](https://app.codeship.com/projects/378002)
+![Build](https://github.com/crishellco/vuelidate-form-group/workflows/Build/badge.svg)
 ![](badges/badge-branches.svg)
 ![](badges/badge-functionss.svg)
 ![](badges/badge-lines.svg)
