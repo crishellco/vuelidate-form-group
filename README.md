@@ -11,7 +11,7 @@ A Vue Form Group component plugin for [Vuelidate](https://vuelidate.js.org/)
 This plugin provides a renderless component which, when using Vuelidate, validates and compiles (with value interpolation) error messages for individual form inputs. This plugin is a direct result of my findings while writing [Vuelidate: Effortless Error Messaging
 ](https://crishell.co/articles/vuelidate--effortless-error-messaging/).
 
-Check out the [demo](https://jovial-noyce-2ca41b.netlify.app/)
+Check out the [demo](https://vuetify-form-group.netlify.app/)
 
 ![](assets/form.gif)
 
